@@ -1,0 +1,22 @@
+{
+  "_comment": [
+    "Notionのプロパティ名との対応表です。",
+    "値を null にするか行を削除すると、その項目は書き込みません。",
+    "Notion側でプロパティ名を変えたら、ここも合わせて変更してください。",
+    "自動で作り直す場合: python -m src.main properties --detect"
+  ],
+  "properties": {
+    "title": "ポスト",
+    "url": "URL",
+    "body": null,
+    "author": "投稿者",
+    "handle": null,
+    "posted_at": "投稿日",
+    "likes": null,
+    "reposts": null,
+    "media": null,
+    "tags": null,
+    "imported_at": "取込日時",
+    "account": null
+  }
+}

@@ -1,0 +1,7 @@
+# 改行コードはリポジトリ内でLFに統一する（Windows環境でのCRLF混在を防ぐ）
+* text=auto eol=lf
+
+# バッチファイルはCRLFを維持する。
+# LFだとラベルや goto の解釈が壊れる場合があり、ダブルクリック実行が失敗しうるため。
+*.bat text eol=crlf
+*.cmd text eol=crlf

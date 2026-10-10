@@ -1,0 +1,51 @@
+name: 機能追加・改善
+description: 追加・変更してほしい機能を書く（Claude が自動で対応します）
+title: "[機能] "
+labels: ["claude:auto", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        このissueを作ると、PCが起動しているときに Claude が自動で対応します。
+        情報が足りない場合は、Claude がこのissueに質問を書き込みます。返信すると作業が再開されます。
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的・背景
+      description: なぜ必要か、何に困っているか。
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 期待する挙動
+      description: どう動くべきか。画面、入出力、操作の流れの例があると確実です。
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: 完了の条件
+      description: どうなったら完成か。確認方法（テストの実行、画面の確認など）があれば書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 触ってよい範囲・触ってはいけない範囲
+      description: 任意。変更したくないファイルや、既存の挙動があれば。
+    validations:
+      required: false
+  - type: dropdown
+    id: version
+    attributes:
+      label: バージョンの上げ方
+      description: 「メジャー」を選ぶと、大幅な変更をしてよいという許可になります（選ばない限り、Claude は事前に質問します）。
+      options:
+        - おまかせ（機能追加ならマイナー。大幅変更が必要なら質問する）
+        - マイナー（機能追加）
+        - パッチ（小さな修正のみ）
+        - メジャー（大幅変更。実施を許可する）
+      default: 0
+    validations:
+      required: true

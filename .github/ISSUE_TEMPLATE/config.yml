@@ -1,0 +1,3 @@
+# 自由記述のissue（メモ・相談など）も作れるようにする。
+# フォームを使わないissueには claude:auto ラベルが付かないので、Claude は自動で対応しません。
+blank_issues_enabled: true

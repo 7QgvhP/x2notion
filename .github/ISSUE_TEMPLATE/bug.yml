@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        このissueを作ると、次にPCへログオンしたときに Claude が自動で対応します（ログオンの1分後に1回だけ巡回します）。
+        このissueを作ると、次にPCへログオンしたとき、または画面ロックを解除したときに Claude が自動で対応します（その1分後に巡回します）。
         情報が足りない場合は、Claude がこのissueに質問を書き込みます。返信すると、次の巡回で作業が再開されます。
   - type: textarea
     id: symptom

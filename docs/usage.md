@@ -1,8 +1,5 @@
 # 使用方法
 
-以下のコマンドは 2026-11-15 に実行して動作を確認した: `--version`、`--help`、`schedule --status`、`python -m tests.test_core`。
-`setup`、`run`、`migrate`、`properties`、`schedule`（登録・解除）、`tools.rebuild_titles` は、X・Notion・タスクスケジューラに実際に接続・書き込みするため実行しておらず「未検証」としている。
-
 コマンドはすべて、リポジトリのフォルダで、仮想環境の Python（`.\.venv\Scripts\python.exe`）を使う。
 
 ## 前提条件
@@ -19,7 +16,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m playwright install chromium
 ```
 
-（未検証。既存の `.venv` があれば不要）
+すでに `.venv` フォルダがあれば不要。
 
 ## 初回の設定
 
@@ -48,7 +45,7 @@ X は自動操作ブラウザでのログインを制限しているため、普
 
 この2つはログイン情報そのもの。他人に共有しない。X からログアウトすると無効になる。
 
-### 5. データベースを作る（未検証）
+### 5. データベースを作る
 ```bash
 .\.venv\Scripts\python.exe -m src.main setup --parent-page <親ページのURL>
 ```
@@ -56,33 +53,33 @@ X は自動操作ブラウザでのログインを制限しているため、普
 
 ## 基本的な使い方
 
-### 試しに取り込む（未検証）
+### 試しに取り込む
 ```bash
 .\.venv\Scripts\python.exe -m src.main run --limit 10 --dry-run
 ```
 Notion には書き込まず、登録対象の一覧だけを表示する。
 
-### 全件を取り込む（未検証）
+### 全件を取り込む
 ```bash
 .\.venv\Scripts\python.exe -m src.main run
 ```
 
-### ダブルクリックで取り込む（未検証）
+### ダブルクリックで取り込む
 エクスプローラーで `取り込み実行.bat` をダブルクリックする。ブラウザは表示されない。取り込みが終わると、X のブックマークから削除するか確認を求める（`y` で削除、Enter でしない）。
 
 ## ユースケース別の手順
 
-### 毎日自動で取り込む（未検証）
+### 毎日自動で取り込む
 `自動実行を設定.bat` をダブルクリックする（既定は毎日 21:00）。取り込んだブックマークは、確認なしで X 側から削除される。
 
 ```bash
 .\.venv\Scripts\python.exe -m src.main schedule --at 08:30   # 時刻を指定して登録
-.\.venv\Scripts\python.exe -m src.main schedule --status     # 登録状況の確認（確認済み）
+.\.venv\Scripts\python.exe -m src.main schedule --status     # 登録状況の確認
 ```
 
 解除は `自動実行を解除.bat`。結果は `logs/<日付>.log` に記録される。
 
-### 取り込んだ後に X のブックマークを空にする（未検証）
+### 取り込んだ後に X のブックマークを空にする
 ```bash
 .\.venv\Scripts\python.exe -m src.main run --dry-run --remove-from-x   # 削除する件数だけを確認
 .\.venv\Scripts\python.exe -m src.main run --remove-from-x             # 取り込んで削除（取り消せない）
@@ -90,25 +87,25 @@ Notion には書き込まず、登録対象の一覧だけを表示する。
 
 ### 複数のアカウントを取り込む
 1. `accounts.example.json` を `accounts.json` にコピーし、アカウントごとに `label`、`auth_token`、`ct0` を記入する（[configuration.md](configuration.md#accountsjson)）。各アカウントの Cookie は、そのアカウントでログインしたブラウザから取る（プロフィールを分けるか、シークレットウィンドウを使う）。
-2. 既存のデータベースに「アカウント」プロパティがなければ、追加する（未検証）。
+2. 既存のデータベースに「アカウント」プロパティがなければ、追加する。
 
 ```bash
 .\.venv\Scripts\python.exe -m src.main migrate
 ```
 
-### 新しい分だけを取り込む（未検証）
+### 新しい分だけを取り込む
 ```bash
 .\.venv\Scripts\python.exe -m src.main run --limit 50
 ```
 各アカウントから新しい50件ずつを取得し、未登録のものだけを追加する（3アカウントなら最大150件）。
 
-### Notion でプロパティの名前を変えた・削除した（未検証）
+### Notion でプロパティの名前を変えた・削除した
 ```bash
 .\.venv\Scripts\python.exe -m src.main properties --detect
 ```
 現在のデータベースの構成から対応表を作り直して、`properties.json` に保存する。推定が誤っている場合は、ファイルを直接編集する。削除したプロパティを戻すときは、`properties.json` に名前を書いてから `migrate` を実行する。
 
-### タイトルの文字数を変えて、既存の行にも反映する（未検証）
+### タイトルの文字数を変えて、既存の行にも反映する
 `src/x_bookmarks.py` の `TITLE_MAX_CHARS` を変えてから、次を実行する。
 ```bash
 .\.venv\Scripts\python.exe -m tools.rebuild_titles --dry-run

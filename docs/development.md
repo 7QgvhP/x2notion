@@ -8,15 +8,13 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m playwright install chromium
 ```
 
-TODO(要確認): 必要な Python のバージョンは記録がない（コードは `from __future__ import annotations` と `X | None` の型ヒントを使っている）。
-
 ## テスト
 
 ```bash
 .\.venv\Scripts\python.exe -m tests.test_core
 ```
 
-中核ロジック（タイトルの要約、内部 API の応答の解析、重複判定、取り込み計画、設定の検証など）の回帰テスト。外部との通信はしないので、いつでも実行できる。2026-11-15 の確認時は 38 件すべて成功した。
+中核ロジック（タイトルの要約、内部 API の応答の解析、重複判定、取り込み計画、設定の検証など）の回帰テスト。外部との通信はしないので、いつでも実行できる。
 
 X と Notion への実際の通信を伴う動作は、認証情報のある手元の環境で、`run --dry-run` などで確認する。
 

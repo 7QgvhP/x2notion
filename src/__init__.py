@@ -2,4 +2,4 @@
 
 APP_NAME = "X2Notion"
 
-__version__ = "1.8.6"
+__version__ = "1.8.7"
